@@ -53,6 +53,8 @@ const accounts = [
   },
 ];
 
+const containerMovements = document.querySelector(".movements");
+
 const btnLogin = document.querySelector(".login-btn");
 
 const inputLoginUsername = document.querySelector(".login-input-username");
@@ -60,7 +62,7 @@ const inputLoginEmail = document.querySelector(".login-input-email");
 const inputLoginPassword = document.querySelector(".login-input-password");
 
 
-//LogIN
+/* //LogIN
 btnLogin.addEventListener("click",function(e){
   e.preventDefault();
 
@@ -73,4 +75,27 @@ btnLogin.addEventListener("click",function(e){
   }else{
     alert("Wrong Information")
   }
-})
+}) */
+
+//Movements
+function displayMovements(accounts){
+  containerMovements.innerHTML ="";
+
+  const moves = accounts.movements;
+  moves.forEach((move,i) =>{
+
+    const color = move > 0 ? "green" : "red";
+    const type = move > 0 ? "deposit" : "withdrawal";
+    const html = `
+    <div class="flex justify-between p-3">
+          <div class="movements-type-deposit bg-${color}-500 w-28 mb-1 text-black text-center rounded-sm text-sm p-1">${i+1} ${type}</div>
+          <div class="movements-date">5 days ago</div>
+          <div class="movements-value">${move}$</div>
+    </div>
+    `;
+
+    containerMovements.insertAdjacentHTML("afterbegin",html)
+  })
+}
+
+displayMovements(accounts[0])
