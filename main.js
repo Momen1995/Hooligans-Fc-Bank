@@ -57,6 +57,10 @@ const containerMovements = document.querySelector(".movements");
 
 const btnLogin = document.querySelector(".login-btn");
 
+const labelSumIn = document.querySelector(".summary-value-in");
+const labelSumOut = document.querySelector(".summary-value-out");
+const labelSumInterest = document.querySelector(".summary-value-interest");
+
 const inputLoginUsername = document.querySelector(".login-input-username");
 const inputLoginEmail = document.querySelector(".login-input-email");
 const inputLoginPassword = document.querySelector(".login-input-password");
@@ -99,3 +103,26 @@ function displayMovements(accounts){
 }
 
 displayMovements(accounts[0])
+
+//DisplayBalance
+function displayBalance(accounts){
+
+ //incomes
+ const incomes = accounts.movements.filter(move => move > 0).reduce((acc,deposit) => acc + deposit,0)
+ labelSumIn.textContent = `${incomes}$`
+
+ //withdraw
+ const withdraw = accounts.movements.filter(move => move < 0).reduce((acc,withdraw) => acc + withdraw,0)
+ labelSumOut.textContent = `${Math.abs(withdraw)}$`
+
+ //interest
+ const interest = accounts.movements
+   .filter((move) => move > 0)
+   .map((deposit) => (deposit * accounts.interestRate) / 100).reduce((acc , deposit) => acc + deposit,0);
+ labelSumInterest.textContent = `${interest}$`
+ 
+}
+
+displayBalance(accounts[0])
+
+//Display Balance
