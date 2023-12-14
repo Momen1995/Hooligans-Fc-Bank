@@ -6,7 +6,7 @@
 const accounts = [
   {
     owner: "Md Momen",
-    email : "momen@gmail.com",
+    email: "momen@gmail.com",
     movements: [
       2500, 500, -750, 1200, 3200, -1500, 500, 1200, -1750, 1800, 4000,
     ],
@@ -30,7 +30,7 @@ const accounts = [
 
   {
     owner: "Golam Rabbani",
-    email : "golamrabbani@gmail.com",
+    email: "golamrabbani@gmail.com",
     movements: [
       5000, 3400, -150, -790, -3210, -1000, 8500, -300, 1500, -1850, 3000,
     ],
@@ -53,76 +53,28 @@ const accounts = [
   },
 ];
 
-const containerMovements = document.querySelector(".movements");
-
-const btnLogin = document.querySelector(".login-btn");
-
+const labelWelcome = document.querySelector(".welcome");
+const labelDate = document.querySelector(".date");
+const labelBalance = document.querySelector(".balance-value");
 const labelSumIn = document.querySelector(".summary-value-in");
 const labelSumOut = document.querySelector(".summary-value-out");
 const labelSumInterest = document.querySelector(".summary-value-interest");
+const labelTimer = document.querySelector(".timer");
+
+const containerApp = document.querySelector(".app");
+const containerMovements = document.querySelector(".movements");
+
+const btnLogin = document.querySelector(".login-btn");
+const btnTransfer = document.querySelector(".form-btn-transfer");
+const btnLoan = document.querySelector(".form-btn-loan");
+const btnClose = document.querySelector(".form-btn-close");
+const btnSort = document.querySelector(".btn-sort");
 
 const inputLoginUsername = document.querySelector(".login-input-username");
-const inputLoginEmail = document.querySelector(".login-input-email");
 const inputLoginPassword = document.querySelector(".login-input-password");
+const inputTransferTo = document.querySelector(".form-input-to");
+const inputTransferAmount = document.querySelector(".form-input-amount");
+const inputLoanAmount = document.querySelector(".form-input-loan-amount");
+const inputCloseUsername = document.querySelector(".form-input-username");
+const inputClosePassword = document.querySelector(".form-input-password");
 
-
-/* //LogIN
-btnLogin.addEventListener("click",function(e){
-  e.preventDefault();
-
-  const inputUsername = inputLoginUsername.value;
-  const inputEmail = inputLoginEmail.value;
-  const inputPassword = Number(inputLoginPassword.value);
-
-  if(accounts[0].owner === inputUsername && accounts[0].password === inputPassword && accounts[0].email === inputEmail ){
-    window.location.href = "bank.html";
-  }else{
-    alert("Wrong Information")
-  }
-}) */
-
-//Movements
-function displayMovements(accounts){
-  containerMovements.innerHTML ="";
-
-  const moves = accounts.movements;
-  moves.forEach((move,i) =>{
-
-    const color = move > 0 ? "green" : "red";
-    const type = move > 0 ? "deposit" : "withdrawal";
-    const html = `
-    <div class="flex justify-between p-3">
-          <div class="movements-type-deposit bg-${color}-500 w-28 mb-1 text-black text-center rounded-sm text-sm p-1">${i+1} ${type}</div>
-          <div class="movements-date">5 days ago</div>
-          <div class="movements-value">${move}$</div>
-    </div>
-    `;
-
-    containerMovements.insertAdjacentHTML("afterbegin",html)
-  })
-}
-
-displayMovements(accounts[0])
-
-//DisplayBalance
-function displayBalance(accounts){
-
- //incomes
- const incomes = accounts.movements.filter(move => move > 0).reduce((acc,deposit) => acc + deposit,0)
- labelSumIn.textContent = `${incomes}$`
-
- //withdraw
- const withdraw = accounts.movements.filter(move => move < 0).reduce((acc,withdraw) => acc + withdraw,0)
- labelSumOut.textContent = `${Math.abs(withdraw)}$`
-
- //interest
- const interest = accounts.movements
-   .filter((move) => move > 0)
-   .map((deposit) => (deposit * accounts.interestRate) / 100).reduce((acc , deposit) => acc + deposit,0);
- labelSumInterest.textContent = `${interest}$`
- 
-}
-
-displayBalance(accounts[0])
-
-//Display Balance
