@@ -9,10 +9,83 @@
   <link rel="shortcut icon" href="./images/logo.jpg" type="image/x-icon">
 </head>
 <body class="w-9/12 mx-auto mt-5">
-  <header>
+  <header class="flex justify-between">
     <div class="logo">
       <h3>Bank of <img src="./images/logo.jpg" class="w-10"></h3>
     </div>
+    <!-- Deatils -->
+    <div>
+      <h3>Name: Md Momen</h3>
+      <p>Age: 27</p>
+      <img src="./images/man1.jpg" class="w-16 rounded-full">
+    </div>
+  </main>
   </header>
+
+  <main class="mt-5">
+    <!-- Balance -->
+  <div class="balance flex justify-between">
+    <div>
+      <p class="text-xl">Current Balance</p>
+    <p class="balance-date text-sm">As of <span class="date">21/9/2022</span></p>
+    </div>
+    <p class="balance-value text-3xl">1000$</p>
+  </div>
+
+  <!-- Movements -->
+  <div class="flex justify-between gap-5 mt-8">
+    <div class="movements w-7/12 bg-white overflow-y-scroll">
+        <div class="movements-row p-3 flex justify-between divided-y divided-black divide-y-reverse">
+          <div class="movements-type movements-type-deposit bg-green-500 w-24 mb-1 text-black text-center rounded-sm">5 deposit</div>
+          <div class="movements-date">5 days ago</div>
+          <div class="movements-value">1000$</div>
+        </div>
+        <div class="movements-row p-3 flex justify-between">
+          <div class="movements-type movements-type-withdrawal bg-red-500 w-28 mb-1 text-black text-center rounded-sm">
+            5 withdrawal
+          </div>
+          <div class="movements-date">21/9/2022</div>
+          <div class="movements-value">-1000$</div>
+        </div>
+    </div>
+
+    <!-- transfer -->
+    <div class="w-5/12">
+      <div class="operation-transfer bg-green-500 p-6 rounded mb-3">
+        <h2 class="text-xl text-center mb-3">Transfer money</h2>
+        <form class="form form-transfer">
+          <div class="flex gap-3">
+            <input class="form-input form-input-to w-11/12 p-1 text-center mb-2" type="text"  placeholder="Transfer To"/>
+            <input class="form-input form-input-amount w-11/12 p-1 text-center mb-2" type="number" placeholder="Amount"/>
+            <button class="form-btn form-btn-transfer">&rarr;</button>
+          </div>
+        </form>
+    </div>
+
+    <!-- loan -->
+    <div class="operation-loan bg-red-500 p-6 rounded mb-3">
+        <h2 class="text-xl text-center mb-3"> Request loan</h2>
+        <form class="form form-loan">
+         <div class="flex gap-10">
+          <input class="form-input form-input-loan-amount w-6/12 p-1 text-center mb-2" type="number" placeholder="Loan amount"/>
+          <button class="form-btn form-btn-loan">&rarr;</button>
+         </div>
+        </form>
+    </div>
+
+    <!-- Close -->
+      <div class="operation-close bg-yellow-500 p-6 rounded">
+        <h2 class="text-xl text-center mb-3">Close account</h2>
+        <form class="form form-close">
+          <div class="flex gap-5">
+            <input class="form-input form-input-username w-11/12 p-1 text-center mb-2" type="email" placeholder="Email"/>
+            <input class="form-input form-input-password w-11/12 p-1 text-center mb-2" type="password" placeholder="password"/>
+            <button class="form-btn form-btn-close">&rarr;</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </main>
 </body>
 </html>
