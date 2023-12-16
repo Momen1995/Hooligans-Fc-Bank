@@ -181,3 +181,111 @@ function displayBalance(accounts) {
 };
 
 displayBalance(accounts[0]);
+
+//Transfer
+btnTransfer.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const receiverAccount = accounts.find(
+    (account) => account.username === inputTransferTo.value
+  );
+
+  const amount = Number(inputTransferAmount.value);
+
+  //clear
+  inputTransferTo.value = inputTransferAmount.value = "";
+  inputTransferAmount.blur();
+
+  if (
+    amount > 0 &&
+    amount <= currentAccount.balance &&
+    currentAccount.username !== receiverAccount.username &&
+    receiverAccount
+  ) {
+    setTimeout(() => {
+      currentAccount.movements.push(-amount);
+      receiverAccount.movements.push(amount);
+
+      updateUi(currentAccount);
+      labelWelcome.textContent = `Transection sucessfull`;
+    }, 2000);
+  } else {
+    setTimeout(() => {
+      labelWelcome.textContent = `Transection failed`;
+    }, 2000);
+  }
+});
+
+///////////////////////////////////////////////////////////
+/////////Transfer to
+/////////////////////////////////////////////////////////
+btnTransfer.addEventListener("click",function(e){
+  e.preventDefault()
+
+  const receiverAccount = accounts.find(account => account.username === inputTransferTo.value )
+
+  const amount = Number(inputTransferAmount.value);
+
+  //clear
+  inputTransferTo.value = inputTransferAmount.value = "";
+  inputTransferAmount.blur()
+
+  if(amount > 0 && amount <= currentAccount.balance && currentAccount.username !== receiverAccount.username && receiverAccount){
+    setTimeout(()=>{
+      currentAccount.movements.push(-amount);
+      receiverAccount.movements.push(amount);
+
+      updateUi(currentAccount);
+      labelWelcome.textContent = `Transection sucessfull`;
+    },2000)
+  }else{
+    setTimeout(()=>{
+      labelWelcome.textContent = `Transection failed`;
+    },2000)
+  }
+})
+
+
+//request loan
+btnLoan.addEventListener("click",function(e){
+  e.preventDefault()
+
+  const amount = Number(inputLoanAmount.value);
+  if(amount > 0 && currentAccount.movements.some(move => move * 0.1)){
+    setTimeout(() => {
+      currentAccount.movements.push(amount);
+      updateUi(currentAccount);
+      labelWelcome.textContent = `Loan sucessfully Done`;
+    }, 2000);
+  }else{
+     setTimeout(() => {
+      labelWelcome.textContent = `Loan sucessfully not Done`;
+     }, 2000);
+  }
+  inputLoanAmount.value = "";
+  inputLoanAmount.blur();
+})
+
+//close account
+btnClose.addEventListener("click",function(e){
+  e.preventDefault()
+
+  if(currentAccount.username === inputCloseUsername.value && currentAccount.password === Number(inputClosePassword.value)){
+   setTimeout(()=>{
+     const index = accounts.findIndex(
+       (account) => account.username === currentAccount.username
+     );
+     accounts.splice(index, 0);
+     containerApp.style.opacity = 0;
+     labelWelcome.textContent = `Close account`;
+   },2000)
+  }else{
+     setTimeout(() => {
+      labelWelcome.textContent = `Not Close account`;
+     }, 2000);
+  }
+
+  //clear field
+  inputCloseUsername.value = inputClosePassword.value = "";
+  inputClosePassword.blur()
+})
